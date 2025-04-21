@@ -72,11 +72,25 @@ Will start the bee-dashboard on [`http://localhost:3005`](http://localhost:3005)
 To build Docker image and run it, execute the following from inside project directory:
 
 ```sh
+# Basic build with default values
 docker build . -t bee-dashboard
 docker run --rm -p 127.0.0.1:8080:8080 bee-dashboard
 ```
 
-Bee dashboard is now available on [`http://localhost:8080`](http://localhost:8080)
+You can also customize the Bee host and port during build:
+
+```sh
+# Build with custom Bee host and port
+docker build \
+  --build-arg REACT_APP_BEE_HOST=http://your-bee-host:1633 \
+  --build-arg BEE_DESKTOP_PORT=7999 \
+  -t bee-dashboard .
+
+# Run with the custom port
+docker run --rm -p 127.0.0.1:7999:7999 bee-dashboard
+```
+
+Bee dashboard is now available on [`http://localhost:8080`](http://localhost:8080) (or your custom port if specified)
 
 ### Development
 
